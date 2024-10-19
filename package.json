@@ -1,0 +1,46 @@
+{
+  "name": "ranni-discordbot",
+  "version": "1.0.0",
+  "description": "Ranni is a Discord BOT developed with discord.js + TypeScript.",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "start": "tsc & node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:studio": "npx prisma studio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oiurisoares/Ranni-DiscordBot.git"
+  },
+  "keywords": [
+    "Bot",
+    "Discord.js",
+    "Node",
+    "Typescript"
+  ],
+  "author": "@oiurisoares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oiurisoares/Ranni-DiscordBot/issues"
+  },
+  "homepage": "https://github.com/oiurisoares/Ranni-DiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.21.1",
+    "@types/node": "^22.7.5",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "prisma": "^5.21.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}

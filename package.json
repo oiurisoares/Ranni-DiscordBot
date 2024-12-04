@@ -1,0 +1,50 @@
+{
+  "name": "ranni-discordbot",
+  "version": "1.0.0",
+  "description": "Ranni is a Discord BOT developed with discord.js + TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prisma:generate": "npx prisma generate",
+    "prisma:studio": "npx prisma studio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oiurisoares/Ranni-DiscordBot.git"
+  },
+  "keywords": [
+    "Bot",
+    "Discord",
+    "MySQL",
+    "Prisma",
+    "Typescript"
+  ],
+  "author": "@oiurisoares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oiurisoares/Ranni-DiscordBot/issues"
+  },
+  "homepage": "https://github.com/oiurisoares/Ranni-DiscordBot#readme",
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "prisma": "^5.22.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.5"
+  }
+}

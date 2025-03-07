@@ -2,9 +2,10 @@
   "name": "ranni-discordbot",
   "version": "1.0.0",
   "description": "Ranni is a Discord BOT developed with discord.js + TypeScript.",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc",
+    "deploy-commands": "ts-node-dev src/deploy-commands.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -128,3 +128,18 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Prisma files
+prisma/dev.db
+prisma/migrations
+prisma/.env
+
+# SSL
+fullchain.pem
+privkey.pem
+
+# Visual Studio Code
+.vscode
+
+# Shared Files
+src/assets/shared

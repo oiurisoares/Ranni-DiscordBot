@@ -30,6 +30,16 @@
     },
     "rules": {
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "arrow-body-style": [
+            "error",
+            "always"
+        ],
         "camelcase": [
             "error",
             {
@@ -94,7 +104,12 @@
         ],
         "no-console": "off",
         "no-undef": "off",
-        "no-unused-vars": "warn",
+        "no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
         "no-use-before-define": "off",
         "quotes": [
             "error",

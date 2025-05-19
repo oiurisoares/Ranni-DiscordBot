@@ -1,0 +1,6 @@
+model Guild {
+    createdAt      DateTime? @default(now())
+    defaultChannel String?   @unique
+    id             String    @id @default(uuid())
+    updatedAt      DateTime? @updatedAt
+}

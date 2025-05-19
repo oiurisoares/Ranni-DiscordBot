@@ -1,3 +1,4 @@
+import { Collection, REST, Routes } from 'discord.js';
 import { v4 as uuidv4 } from 'uuid';
 import express, {
     Application, Request, Response, NextFunction,
@@ -14,6 +15,8 @@ import router from './routes';
 import discord from './config/discordjs';
 
 dotenv.config();
+const commands = new Collection<string, any>()
+const commandsToDeploy: any[] = [];
 const mediaFilesPath = path.join(__dirname, 'assets/shared');
 const server: Application = express();
 
@@ -131,6 +134,38 @@ server.get('/sharedFiles/download/:file', (req: Request, res: Response) => {
     }
 });
 
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fileSystem
+    .readdirSync(commandsPath)
+    .filter((file) => {
+        return file.endsWith('.ts')
+            || file.endsWith('.js');
+    });
+
+commandFiles.forEach(async (file) => {
+    const filePath = path.join(commandsPath, file)
+    const { default: command } = require(filePath)
+    if (!('data' in command || 'execute' in command)) {
+        console.error(`Command ${file} is missing a property.`);
+        return;
+    }
+    commands.set(command.data.name, command);
+    commandsToDeploy.push(command.data.toJSON());
+});
+
+const rest = new REST().setToken(process.env.DISCORD_TOKEN!);
+(async () => {
+    try {
+        console.log('Started refreshing commands.');
+        await rest.put(
+            Routes.applicationCommands(process.env.CLIENT_ID!),
+            { body: commandsToDeploy });
+        console.log('Successfully reloaded commands.');
+    } catch (error: any) {
+        console.error('Error registering commands:', error);
+    }
+})();
+
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fileSystem
     .readdirSync(eventsPath)
@@ -157,4 +192,4 @@ discord.login(process.env.DISCORD_TOKEN)
         console.error('Error logging in to Discord:', error.message);
     });
 
-export default upload;
+export { commands, upload };

@@ -13,9 +13,11 @@ import multer, { StorageEngine } from 'multer';
 import path from 'path';
 import router from './routes';
 import discord from './config/discordjs';
+import { Guild } from './models/Guild';
+import guildService from './services/guildService';
 
 dotenv.config();
-const commands = new Collection<string, any>()
+export const commands = new Collection<string, any>();
 const commandsToDeploy: any[] = [];
 const mediaFilesPath = path.join(__dirname, 'assets/shared');
 const server: Application = express();
@@ -28,7 +30,7 @@ const storage: StorageEngine = multer.diskStorage({
         callback(null, `${uuidv4()}${path.extname(file.originalname)}`);
     },
 });
-const upload = multer({
+export const upload = multer({
     limits: {
         files: 15,
         fileSize: 500 * 1024 * 1024,
@@ -143,28 +145,34 @@ const commandFiles = fileSystem
     });
 
 commandFiles.forEach(async (file) => {
-    const filePath = path.join(commandsPath, file)
-    const { default: command } = require(filePath)
+    const { default: command } = await import(path.join(commandsPath, file));
     if (!('data' in command || 'execute' in command)) {
-        console.error(`Command ${file} is missing a property.`);
+        console.warn(`Command ${file} is missing a property.`);
         return;
     }
     commands.set(command.data.name, command);
     commandsToDeploy.push(command.data.toJSON());
 });
 
-const rest = new REST().setToken(process.env.DISCORD_TOKEN!);
-(async () => {
-    try {
-        console.log('Started refreshing commands.');
-        await rest.put(
-            Routes.applicationCommands(process.env.CLIENT_ID!),
-            { body: commandsToDeploy });
-        console.log('Successfully reloaded commands.');
-    } catch (error: any) {
-        console.error('Error registering commands:', error);
-    }
-})();
+if (process.env.DEPLOY_COMMANDS === 'true') {
+    const rest = new REST().setToken(process.env.DISCORD_TOKEN!);
+    (async () => {
+        try {
+            const guilds: Guild[] = await guildService.getAll();
+            if (!guilds) return;
+            console.info('Started refreshing commands.');
+            guilds.forEach(async (guild) => {
+                await rest.put(
+                    Routes.applicationGuildCommands(process.env.CLIENT_ID!, guild.id),
+                    { body: commandsToDeploy },
+                );
+            });
+            console.info('Successfully reloaded commands.');
+        } catch (error: any) {
+            console.error('Error registering commands:', error);
+        }
+    })();
+}
 
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fileSystem
@@ -191,5 +199,3 @@ discord.login(process.env.DISCORD_TOKEN)
     .catch((error: Error) => {
         console.error('Error logging in to Discord:', error.message);
     });
-
-export { commands, upload };

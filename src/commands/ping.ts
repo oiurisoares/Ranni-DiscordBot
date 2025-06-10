@@ -9,13 +9,26 @@ export default {
         .addBooleanOption((option) => {
             return option
                 .setDescription('Retrieves ping detailed information📍')
+                .setDescriptionLocalizations({
+                    'pt-BR': 'Recupera informações detalhadas sobre o ping📍',
+                })
                 .setName('detail')
                 .setRequired(false);
         })
         .setDescription('🏓Replies with pong!')
+        .setDescriptionLocalizations({
+            'pt-BR': '🏓Responde com pong!',
+        })
         .setName('ping')
         .setNSFW(false),
 
+    /**
+     * Executes the ping command.
+     * This command measures the response time of the bot and the WebSocket latency.
+     * --
+     * @param interaction The interaction object for the ping command.
+     * @returns {Promise<void>}
+     */
     async execute(interaction: ChatInputCommandInteraction) {
         const start = process.hrtime();
         await interaction.deferReply();

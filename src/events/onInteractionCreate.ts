@@ -9,6 +9,15 @@ import autocompleteHandler from '../handlers/autocompleteHandler';
 export default {
     name: Events.InteractionCreate,
     once: false,
+
+    /**
+     * Handles interaction events in the Discord server.
+     * This event is triggered when a user interacts with a command in the server.
+     * --
+     * @param interaction The interaction object for the command.
+     * @returns {Promise<void>}
+     * @throws {Error} If an error occurs while executing the command.
+     */
     async execute(interaction: ChatInputCommandInteraction) {
         if (interaction.isAutocomplete()) {
             await autocompleteHandler(interaction);

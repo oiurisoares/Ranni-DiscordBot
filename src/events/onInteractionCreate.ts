@@ -10,20 +10,20 @@ export default {
     name: Events.InteractionCreate,
     once: false,
     async execute(interaction: ChatInputCommandInteraction) {
+        if (interaction.isAutocomplete()) {
+            await autocompleteHandler(interaction);
+        }
         if (!interaction.isCommand()) return;
 
         const command = commands.get(interaction.commandName);
         if (!command) {
             await interaction.reply({
                 content: 'Command not found.',
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral,
             });
             return;
         }
         try {
-            if (interaction.isAutocomplete()) {
-                await autocompleteHandler(interaction);
-            }
             if (interaction.isChatInputCommand()) {
                 await command.execute(interaction);
             }

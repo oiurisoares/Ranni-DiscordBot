@@ -11,9 +11,10 @@ import helmet from 'helmet';
 import https from 'https';
 import multer, { StorageEngine } from 'multer';
 import path from 'path';
+import chalk from 'chalk';
+import { Guild } from './models/Guild';
 import router from './routes';
 import discord from './config/discordjs';
-import { Guild } from './models/Guild';
 import guildService from './services/guildService';
 
 dotenv.config();
@@ -80,7 +81,8 @@ express.urlencoded({ extended: true });
 server.use('/api', router);
 
 server.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
-    console.error(`Error: ${error.message}`);
+    console.error(chalk
+        .red(`Error: ${error.message}`));
     res.status(500).json({
         message: 'Internal Server Error',
         error: process.env.NODE_ENV === 'development' ? error.message : undefined,
@@ -107,7 +109,8 @@ const httpsOption = {
 const httpsServer = https.createServer(httpsOption, server);
 const { PORT } = process.env || 3000;
 httpsServer.listen(PORT, () => {
-    console.info(`Server is running on port: ${PORT}`);
+    console.info(chalk
+        .green(`Server is running on port ${PORT}`));
 });
 
 server.get('/sharedFiles/download/:file', (req: Request, res: Response) => {
@@ -160,16 +163,19 @@ if (process.env.DEPLOY_COMMANDS === 'true') {
         try {
             const guilds: Guild[] = await guildService.getAll();
             if (!guilds) return;
-            console.info('Started refreshing commands.');
+            console.info(chalk
+                .blue('\nStarted refreshing commands.'));
             guilds.forEach(async (guild) => {
                 await rest.put(
                     Routes.applicationGuildCommands(process.env.CLIENT_ID!, guild.id),
                     { body: commandsToDeploy },
                 );
             });
-            console.info('Successfully reloaded commands.');
+            console.info(chalk
+                .blue('Successfully reloaded commands.'));
         } catch (error: any) {
-            console.error('Error registering commands:', error);
+            console.error(chalk
+                .red('Error registering commands:', error));
         }
     })();
 }
@@ -197,5 +203,6 @@ eventFiles.forEach(async (file) => {
 
 discord.login(process.env.DISCORD_TOKEN)
     .catch((error: Error) => {
-        console.error('Error logging in to Discord:', error.message);
+        console.error(chalk
+            .red('Error logging in to Discord:', error.message));
     });

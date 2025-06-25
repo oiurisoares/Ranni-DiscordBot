@@ -5,6 +5,15 @@ import {
 } from 'discord.js';
 
 export default {
+
+    /**
+     * The ping command definition.
+     * This command is used to check the bot's response time and WebSocket latency.
+     * --
+     * @type {import('discord.js').SlashCommandBuilder}
+     * @property {boolean} detail - Indicates whether to provide detailed ping
+     * information.
+     */
     data: new SlashCommandBuilder()
         .addBooleanOption((option) => {
             return option

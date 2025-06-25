@@ -4,6 +4,9 @@ import chalk from 'chalk';
 /**
  * Prisma client configuration.
  * This client is used to interact with the database.
+ * --
+ * @type {PrismaClient}
+ * @property {string} url - The database connection URL.
  */
 const prisma = new PrismaClient();
 prisma.$connect()

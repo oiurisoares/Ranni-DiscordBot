@@ -9,6 +9,16 @@ import axiosInstance from '../config/axios';
 import categories from '../assets/waifupics.categories.json';
 
 export default {
+
+    /**
+     * The waifupics command definition.
+     * This command allows users to fetch and send random waifu pictures.
+     * --
+     * @type {import('discord.js').SlashCommandBuilder}
+     * @property {boolean} nsfw - Indicates whether the command is NSFW.
+     * @property {string} amount - Specifies the number of images to send.
+     * @property {string} category - The category of waifu pictures to fetch.
+     */
     data: new SlashCommandBuilder()
         .addBooleanOption((option) => {
             return option

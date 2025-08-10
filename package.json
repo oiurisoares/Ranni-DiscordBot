@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate": "npx prisma migrate dev",
+    "prisma:push": "npx prisma db push",
     "prisma:studio": "npx prisma studio"
   },
   "repository": {
@@ -50,6 +51,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@discordjs/voice": "^0.18.0",
     "@prisma/client": "^6.8.2",
     "axios": "^1.9.0",
     "bcrypt": "^5.1.1",
@@ -62,6 +64,7 @@
     "helmet": "^8.1.0",
     "multer": "^1.4.5-lts.2",
     "mysql2": "^3.11.5",
+    "play-dl": "^1.9.7",
     "uuid": "^11.1.0"
   }
 }

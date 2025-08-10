@@ -9,6 +9,7 @@ export default {
     /**
      * The ping command definition.
      * This command is used to check the bot's response time and WebSocket latency.
+     * It can also provide detailed ping information if requested.
      * --
      * @type {import('discord.js').SlashCommandBuilder}
      * @property {boolean} detail - Indicates whether to provide detailed ping
@@ -34,6 +35,8 @@ export default {
     /**
      * Executes the ping command.
      * This command measures the response time of the bot and the WebSocket latency.
+     * If the `detail` option is set to true, it provides additional information
+     * about the response time and latency.
      * --
      * @param interaction The interaction object for the ping command.
      * @returns {Promise<void>}

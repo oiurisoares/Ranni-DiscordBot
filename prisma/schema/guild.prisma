@@ -2,5 +2,10 @@ model Guild {
     createdAt      DateTime? @default(now())
     defaultChannel String?   @unique
     id             String    @id @default(uuid())
+    isBlacklisted  Boolean?  @default(false)
+    name           String?
+    isPremium      Boolean?  @default(false)
     updatedAt      DateTime? @updatedAt
+    user           User[]
+    welcomeChannel String?
 }

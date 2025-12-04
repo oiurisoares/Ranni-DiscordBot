@@ -32,13 +32,13 @@
   "homepage": "https://github.com/oiurisoares/Ranni-DiscordBot#readme",
   "devDependencies": {
     "@types/axios": "^0.14.4",
-    "@types/bcrypt": "^5.0.2",
+    "@types/bcrypt": "^6.0.0",
     "@types/chalk": "^2.2.4",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
     "@types/helmet": "^4.0.0",
-    "@types/multer": "^1.4.12",
+    "@types/multer": "^2.0.0",
     "@types/node": "^24.10.1",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
@@ -51,20 +51,20 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@discordjs/voice": "^0.18.0",
-    "@prisma/client": "^6.8.2",
+    "@discordjs/voice": "^0.19.0",
+    "@prisma/client": "^7.1.0",
     "axios": "^1.9.0",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "chalk": "^5.4.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
     "helmet": "^8.1.0",
-    "multer": "^1.4.5-lts.2",
+    "multer": "^2.0.2",
     "mysql2": "^3.11.5",
     "play-dl": "^1.9.7",
-    "uuid": "^11.1.0"
+    "uuid": "^13.0.0"
   }
 }

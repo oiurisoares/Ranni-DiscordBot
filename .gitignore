@@ -137,3 +137,21 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Prisma files
+/src/generated
+prisma/dev.db
+prisma/migrations
+prisma/.env
+
+# SSL
+fullchain.pem
+privkey.pem
+
+# Visual Studio Code
+.vscode
+
+# Shared Files
+src/assets/shared
+
+/src/generated/prisma

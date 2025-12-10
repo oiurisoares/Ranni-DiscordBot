@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - commit-message:
+      prefix: "Chore: (GitHub Actions) - "
+    directory: "/"
+    package-ecosystem: "github-actions"
+    rebase-strategy: "auto"
+    schedule:
+      interval: "weekly"
+
+  - commit-message:
+      prefix: "Chore: (Dependencies) - "
+    directory: "/"
+    groups:
+      dev-deps:
+        applies-to: "version-updates"
+        dependency-type: "development"
+      production-deps:
+        applies-to: "version-updates"
+        dependency-type: "production"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    package-ecosystem: "npm"
+    schedule:
+      interval: "weekly"
